@@ -1,6 +1,6 @@
 {
   "name": "@gleb0ff/react-image-cropper",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "React canvas image cropper",
   "private": false,
   "author": "Vasiliy Glebov",

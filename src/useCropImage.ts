@@ -12,6 +12,7 @@ import { ICoords, ICropperImageParams, IReturnCropped, ISize, IUseCropImage } fr
  * @param cropType {'image/png' | 'image/jpeg' | 'image/webp' | 'image/bmp' | 'image/gif'} - The MIME type of the output image. default 'image/jpeg'
  * @param cropQuality {number} - The quality of the image, on a scale from 0 to 1. default 1
  * @param cropFileName {string} - The fileName of the image. default 'image.jpg'
+ * @param cropImageBackground {string} - The background of the transparent images like png. default 'white'
  * @return cropImage {()=>Promise<IReturnCropped>} - function that returns objectURL or File or Blob.
  * @return isLoading {boolean} - Image loading state.
  * @return cropFunctionalProps {obj} - functional props, pass them into CropCanvas {...cropFunctionalProps}.
@@ -25,6 +26,7 @@ export function useCropImage({
   cropQuality = 1,
   imageSrc,
   cropFileName = 'image.jpg',
+  cropImageBackground='white'
 }: ICropperImageParams): IUseCropImage {
   const [image, setImage] = useState<HTMLImageElement>()
   const [isLoading, setIsLoading] = useState(true)
@@ -59,6 +61,9 @@ export function useCropImage({
         reject('something went wrong')
         return
       }
+      tempCtx.fillStyle = cropImageBackground;
+      tempCtx.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+
       tempCtx.scale(dpr, dpr)
       const tmpCanvasSize = {
         width: tmpCanvas.width / dpr,

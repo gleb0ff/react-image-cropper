@@ -17,6 +17,7 @@ export interface ICropperImageParams {
   cropType?: 'image/png' | 'image/jpeg' | 'image/webp' | 'image/bmp' | 'image/gif'
   cropQuality?: number
   cropFileName?: string
+  cropImageBackground?:string
 }
 
 export interface ICanvasParams {
